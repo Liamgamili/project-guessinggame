@@ -1,0 +1,57 @@
+import random
+
+
+def print_guesses(sentence):
+    printed = ''
+    for word in sentence:
+        for l in word:
+            if l in guesses:
+                printed += l
+            else:
+                printed += '_'
+        printed += ' '
+    print(printed)
+
+
+list = [['always', 'be', 'yourself'],
+['act', 'as', 'if'],
+['act', 'without', 'expectation'],
+['all', 'is', 'well'],
+['allow', 'for', 'delays'],
+['always', 'be', 'honest'],
+['always', 'be', 'good'],
+['always', 'deliver', 'quality'],
+['ask', 'powerful', 'questions']]
+num = random.randint(0, len(list) -1)
+empty_list = []
+for i in range(len(list[num])):
+    empty_list.append('_' * len(list[num][i]))
+print(empty_list)
+points = 0
+guesses = []
+while True:
+    letter= input('enter letter:')
+    if len(letter) > 1:
+        print('only one letter please')
+        continue
+    if letter in guesses:
+        print('cant use same letter twice')
+        continue
+    success = False
+    for word in list[num]:
+        g_count = word.count(letter)
+        points = points + g_count*5
+        if g_count > 0:
+            success = True
+            guesses.append(letter)
+    if success:
+        print('nice')
+    else:
+        print('bad')
+        points -= 1
+    for word in empty_list:
+        if letter in word:
+            indexes = list[num].index(letter)
+            pass
+    print_guesses(list[num])
+    print(points)
